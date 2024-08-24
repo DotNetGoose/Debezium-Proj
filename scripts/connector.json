@@ -10,11 +10,13 @@
     "database.dbname": "EmployeeTrainingDB",
     "database.server.name": "sqlserver",
     "table.include.list": "dbo.Employees,dbo.Trainings,dbo.Certifications,dbo.TrainingRecords",
-    "database.history.kafka.bootstrap.servers": "localhost:9092",
+    "database.history.kafka.bootstrap.servers": "kafka:9092",
     "database.history.kafka.topic": "schema-changes.sqlserver",
     "topic.prefix": "sqlserver",
     "database.names": "EmployeeTrainingDB",
     "database.encrypt": "false",
-    "database.trustServerCertificate": "true"
+    "database.trustServerCertificate": "true",
+    "schema.history.internal.kafka.topic": "schema-history",
+    "schema.history.internal.kafka.bootstrap.servers": "kafka:9092"
   }
 }

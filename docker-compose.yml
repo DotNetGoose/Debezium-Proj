@@ -32,6 +32,9 @@ services:
       INTERNAL_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
       INTERNAL_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
       PLUGIN_PATH: /kafka/connect
-      CONNECTOR_CLASS: io.debezium.connector.sqlserver.SqlServerConnector
     ports:
       - 8083:8083
+    volumes:
+      - ./scripts/setup-connectors.sh:/scripts/setup-connectors.sh
+      - ./scripts/connector.json:/scripts/connector.json
+    entrypoint: ["/bin/sh", "/scripts/setup-connectors.sh"]

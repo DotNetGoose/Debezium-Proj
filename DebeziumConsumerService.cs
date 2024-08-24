@@ -2,20 +2,14 @@
 
 namespace Debezium_Proj
 {
-    public class DebeziumConsumerService : BackgroundService
+    public class DebeziumConsumerService(ILogger<DebeziumConsumerService> logger, IConsumer<Ignore, string> consumer) : BackgroundService
     {
-        private readonly ILogger<DebeziumConsumerService> _logger;
-        private readonly IConsumer<Ignore, string> _consumer;
-
-        public DebeziumConsumerService(ILogger<DebeziumConsumerService> logger, IConsumer<Ignore, string> consumer)
-        {
-            _logger = logger;
-            _consumer = consumer;
-        }
+        private readonly ILogger<DebeziumConsumerService> _logger = logger;
+        private readonly IConsumer<Ignore, string> _consumer = consumer;
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _consumer.Subscribe("sqlserver.dbo.Employees");
+            _consumer.Subscribe("sqlserver.EmployeeTrainingDB.dbo.Employees");
 
             while (!stoppingToken.IsCancellationRequested)
             {
