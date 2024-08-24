@@ -36,16 +36,6 @@ This project demonstrates how to set up Debezium for change data capture (CDC) w
 
    You can monitor the changes in your database through Debezium, which will log the CDC events to the configured Kafka topics. The .NET application will then consume these events and process them as needed.
 
-## Documentation
-
-For detailed information on setting up and configuring Debezium, refer to the official [Debezium documentation](https://debezium.io/documentation/). This documentation includes guides on:
-
-- [Connector Configuration](https://debezium.io/documentation/reference/connectors/sqlserver.html) - Configuring Debezium connectors for various databases, including SQL Server.
-- [CDC Setup](https://debezium.io/documentation/reference/1.9/connectors/sqlserver.html#sqlserver-changes) - Steps to set up change data capture (CDC) for SQL Server and other supported databases.
-- [Kafka Integration](https://debezium.io/documentation/reference/1.9/connectors/kafka.html) - Integrating Debezium with Kafka and managing Kafka topics.
-- [Monitoring and Troubleshooting](https://debezium.io/documentation/reference/1.9/operations.html) - Best practices for monitoring and troubleshooting Debezium and Kafka.
-- [Kafka Clusters](https://blog.devgenius.io/kafka-cluster-on-docker-compose-dae9fcc8c092) - A short guide on how to set up Kafka clusters.
-
 ## Testing Kafka Connections
 
 To ensure Kafka is set up correctly and you can interact with it, use the following commands:
@@ -65,3 +55,15 @@ To ensure Kafka is set up correctly and you can interact with it, use the follow
 
 # Consume Messages from a Kafka Topic
 .\kafka-console-consumer.bat --topic <topic-name> --from-beginning --bootstrap-server localhost:9092
+```
+
+## Documentation
+
+For detailed information on setting up and configuring Debezium, refer to the official [Debezium documentation](https://debezium.io/documentation/). This documentation includes guides on:
+
+- [Connector Configuration](https://debezium.io/documentation/reference/connectors/sqlserver.html) - Configuring Debezium connectors for various databases, including SQL Server.
+- [CDC Setup](https://debezium.io/documentation/reference/1.9/connectors/sqlserver.html#sqlserver-changes) - Steps to set up change data capture (CDC) for SQL Server and other supported databases.
+- [Kafka Integration](https://debezium.io/documentation/reference/1.9/connectors/kafka.html) - Integrating Debezium with Kafka and managing Kafka topics.
+- [Monitoring and Troubleshooting](https://debezium.io/documentation/reference/1.9/operations.html) - Best practices for monitoring and troubleshooting Debezium and Kafka.
+- [Kafka Clusters](https://blog.devgenius.io/kafka-cluster-on-docker-compose-dae9fcc8c092) - A short guide on how to set up Kafka clusters.
+
