@@ -1,4 +1,4 @@
-## Debezium Proj
+## Debezium Project
 
 This project demonstrates how to set up Debezium for change data capture (CDC) with a .NET application. Debezium is configured to monitor changes in a SQL Server database and publish them to Kafka, which are then consumed by a .NET service.
 
