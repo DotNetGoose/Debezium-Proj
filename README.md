@@ -10,8 +10,17 @@ This project demonstrates how to set up Debezium for change data capture (CDC) w
 - [Kafka](https://kafka.apache.org/downloads)
 - [Debezium](https://debezium.io/documentation/)
 - [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+- [SSMS](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16)
 
 ## Setup
+1. **Enable SQL Authentication in SQL Server:**
+   - Open SQL Server Management Studio (SSMS)
+   - Make a new login profile
+   - Right-click on the server instance and select "Properties."
+   - Go to the "Security" page.
+   - Under "Server authentication," select "SQL Server and Windows Authentication mode."
+   - Click "OK" and restart the SQL Server instance for the changes to take effect.
+   
 
 1. **Edit the `connector.json`:**  
    Replace `YOUR_DATABASE_HOSTNAME`, `YOUR_DATABASE_USER`, and `YOUR_DATABASE_PASSWORD` with your actual SQL Server database connection details.
