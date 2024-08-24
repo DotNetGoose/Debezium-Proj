@@ -13,7 +13,7 @@ This project demonstrates how to set up Debezium for change data capture (CDC) w
 
 ## Setup
 
-1. **Edit the connector.json:**  
+1. **Edit the `connector.json`:**  
    Replace `YOUR_DATABASE_HOSTNAME`, `YOUR_DATABASE_USER`, and `YOUR_DATABASE_PASSWORD` with your actual SQL Server database connection details.
 
 2. **Set Up SQL Server:**
