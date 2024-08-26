@@ -16,7 +16,7 @@ namespace Debezium_Proj
             while (!cancellationToken.IsCancellationRequested)
             {
                 var consumeResult = _consumer.Consume(cancellationToken);
-                if (consumeResult != null)
+                if (consumeResult.Message.Value != null)
                 {
                     try
                     {
@@ -29,8 +29,8 @@ namespace Debezium_Proj
                         var changeData = jsonMessage["payload"]?["after"]?.ToString(Formatting.Indented);
 
                         // Log the formatted message
-                        _logger.LogInformation("Received {Operation} operation for table {TableName}. Data: {Data}",
-                            operation, tableName, changeData);
+                        _logger.LogInformation("Received {Operation} operation for table Employees. Data: {Data}",
+                            operation, changeData);
                     }
                     catch (JsonReaderException ex)
                     {
@@ -38,7 +38,7 @@ namespace Debezium_Proj
                     }
                 }
 
-                await Task.Delay(1000, cancellationToken);
+                await Task.Delay(10, cancellationToken);
             }
         }
         public override void Dispose()
