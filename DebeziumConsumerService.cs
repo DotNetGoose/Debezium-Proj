@@ -1,4 +1,6 @@
 ﻿using Confluent.Kafka;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Debezium_Proj
 {
@@ -7,23 +9,38 @@ namespace Debezium_Proj
         private readonly ILogger<DebeziumConsumerService> _logger = logger;
         private readonly IConsumer<Ignore, string> _consumer = consumer;
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
             _consumer.Subscribe("sqlserver.EmployeeTrainingDB.dbo.Employees");
 
-            while (!stoppingToken.IsCancellationRequested)
+            while (!cancellationToken.IsCancellationRequested)
             {
-                var consumeResult = _consumer.Consume(stoppingToken);
+                var consumeResult = _consumer.Consume(cancellationToken);
                 if (consumeResult != null)
                 {
-                    _logger.LogInformation($"Received message: {consumeResult.Message.Value}");
-                    // Process the message (e.g., update local cache, trigger actions, etc.)
+                    try
+                    {
+                        // Parse the message as JSON
+                        var jsonMessage = JObject.Parse(consumeResult.Message.Value);
+
+                        // Extract some key details for structured logging
+                        var operation = jsonMessage["payload"]?["op"]?.ToString();
+                        var tableName = jsonMessage["source"]?["table"]?.ToString();
+                        var changeData = jsonMessage["payload"]?["after"]?.ToString(Formatting.Indented);
+
+                        // Log the formatted message
+                        _logger.LogInformation("Received {Operation} operation for table {TableName}. Data: {Data}",
+                            operation, tableName, changeData);
+                    }
+                    catch (JsonReaderException ex)
+                    {
+                        _logger.LogError(ex, "Failed to parse Kafka message as JSON. Raw message: {Message}", consumeResult.Message.Value);
+                    }
                 }
 
-                await Task.Delay(1000, stoppingToken);
+                await Task.Delay(1000, cancellationToken);
             }
         }
-
         public override void Dispose()
         {
             _consumer.Close();
