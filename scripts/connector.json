@@ -3,10 +3,10 @@
   "config": {
     "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector",
     "tasks.max": "1",
-    "database.hostname": "192.168.0.170",
+    "database.hostname": "192.168.0.170", //Change this to your IPV4 address
     "database.port": "1433",
-    "database.user": "Fernando",
-    "database.password": "admin123",
+    "database.user": "Fernando", //SQL Server Auth Profile
+    "database.password": "admin123", //SQL Server Auth Pwd
     "database.dbname": "EmployeeTrainingDB",
     "database.server.name": "sqlserver",
     "table.include.list": "dbo.Employees,dbo.Trainings,dbo.Certifications,dbo.TrainingRecords",
